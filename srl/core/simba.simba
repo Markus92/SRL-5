@@ -6,23 +6,14 @@
 {$ifdef Simba}
 {$loadlib irokiplugin}
 
-//{$define SimbaDebug}
+//{.$define SimbaDebug}
 type
   TDTMPointDef = TSDTMPointDef;
   TDTMPointDefArray = TSDTMPointDefArray;
   TDTM = TSDTM;
 function  AddDTM(DTM : TDTM) : integer;
 begin
-  result := AddSDTM(dtm);
-end;
-
-function InitializeHTTPClient(HandleCookies,handleredirects: Boolean): Integer;
-begin
-  {$ifdef SimbaDebug}
-  if HandleRedirects then
-    Writeln('Simba does not support automatic redirects yet');
-  {$endif}
-  result := InitializeHTTPClientWrap(HandleCookies);
+  //result := AddSDTM(dtm);
 end;
 
 function IntToPoint(x,y : integer) : TPoint;
@@ -31,7 +22,7 @@ begin
 end;
 
 procedure GetColorspeed2Modifiers(var hue,sat : extended);
-begin;
+begin
   GetToleranceSpeed2Modifiers(hue,sat);
 end;
 
@@ -58,61 +49,11 @@ begin
   DebugLn('Should clear report now..');
 end;
 
-var
-  Bladieblatempthingy : TForm;
-procedure CreateFormBladieblatempthingy;
-begin
-  Bladieblatempthingy := TForm.Create(nil);
-end;
-procedure FreeFormBladieblatempthingy;
-begin
-  if assigned(Bladieblatempthingy) then
-    Bladieblatempthingy.free;
-end;
-procedure FreeForm(var form : TForm);
-var
-  v : TVariantArray;
-begin;
-  Bladieblatempthingy := Form;
-  ThreadSafeCall('FreeFormBladieblatempthingy',v);
-  form := nil;
-end;
-
-function CreateForm : TForm;
-var
-  v : TVariantArray;
-begin;
-  ThreadSafeCall('CreateFormBladieblatempthingy',v);
-  result := Bladieblatempthingy;
-end;
-
 function IsFKeyDown(FKey : integer) : boolean;
 begin
   if not InRange(FKey,1,12) then
     raiseexception(erCustomError,'FKey not in range 1..12');
   result := IsKeyDown(VK_F1 + FKey - 1);
-end;
-
-function GetColors(Coords : TPointArray) : TIntegerArray;
-begin
-  GetColorsWrap(Coords,Result);
-end;
-
-procedure ColorToRGB(Color : TColor; var R,G,B : integer);
-begin
-  R := Color and $ff;
-  G := Color shr 8 and $ff;
-  B := Color shr 16 and $ff;
-end;
-
-function Degrees(Radians: Extended): Extended;
-begin
-  result := Radians * 180 / pi;
-end;
-
-function Radians(Degrees: Extended): Extended;
-begin
-  result := Pi * degrees / 180;
 end;
 
 function InCircle(x, y, mx, my, r: Integer): Boolean;
@@ -126,7 +67,7 @@ begin
 end;
 
 function GetNumbers(text : string) : string;
-begin;
+begin
   result := ExtractFromStr(text,numbers);
 end;
 
@@ -136,12 +77,12 @@ begin
 end;
 
 function GetOthers(Text: string): string;
-begin;
+begin
   result := ExtractFromStr(text,others);
 end;
 
 function FindDTMRotated(DTM: Integer; var x, y: Integer; x1, y1, x2, y2: Integer; sAngle, eAngle, aStep: Extended; out aFound: Extended): Boolean;
-begin;
+begin
   result := FindDTMRotatedAlternating(DTM,x,y,x1,y1,x2,y2,sangle,eangle,astep,afound);
 end;
 
@@ -160,24 +101,6 @@ const
 
 type
   TCharRange = longword; //I donno
-
-function GetTextAtEx(x, y: Integer; Tolerance: Integer; Chars: String; CheckShadow, CheckOutline: Boolean; MinSpacing, MaxSpacing: Integer; TextColor: Integer; TextLength: Integer; Strict: Boolean; Range: TCharRange): anystring;
-begin
-  // no hspacing, defaulting to 4. (with 4 ' and : will work)
-  // Defaulting MaxSpacing to 3
-  if TextColor = -1 then
-    raiseexception(ercustomerror,'GetTextAtEx with color = -1, is not supported');
-  Maxspacing := 3;
-  {$ifdef SimbaDebug}
-  Writeln([x, y, minSpacing, maxSpacing, 4, textcolor, tolerance, textlength, Chars]);
-  {$endif}
-  Result := GetTextAt(x, y, minSpacing, maxSpacing, 4, textcolor, tolerance, textlength, Chars);
-  {$ifdef SimbaDebug}
-  Writeln('GetTextAt result: ' + Result);
-  {$endif}
-  if Range = tr_Digits then
-    result := GetNumbers(result);
-end;
 
 function IsTextInAreaEx(xs, ys, xe, ye: Integer; var x, y: Integer; S: string; Tolerance: Integer; Chars: String; CheckShadow, CheckOutline: Boolean; MinSpacing, MaxSpacing: Integer; TextColor: Integer): Boolean;
 var
@@ -211,12 +134,12 @@ begin
 end;
 
 function GetColorToleranceSpeed : integer;
-begin;
+begin
   result := GetToleranceSpeed;
 end;
 
 procedure ColorToleranceSpeed(cts : integer);
-begin;
+begin
   SetColorToleranceSpeed(cts);
 end;
 
@@ -237,7 +160,7 @@ end;
 function InStrArr(Str: string; Arr: TStringArray; CaseSensitive: Boolean): Boolean;
 var
   i : integer;
-begin;
+begin
   result := true;
   if not casesensitive then
   begin
@@ -250,11 +173,6 @@ begin;
       if arr[i] = str then
         exit;
   result := false;
-end;
-
-function Replace(Text, FindStr, ReplaceStr: string): string;
-begin;
-  result := ReplaceWrap(Text,FindStr,ReplaceStr,[rfReplaceAll]);
 end;
 
 //Sends arrow to Client's window. For a, 0 = up, 1 = right, 2 = down, 3 = left.
@@ -274,7 +192,7 @@ end;
 procedure SendArrowWait(Key: Byte; WaitTime: Integer);
 var
   KeyCode : integer;
-begin;
+begin
   if not InRange(Key,0,3) then
     Writeln('KEY IS NOT INRANGE!!')
   else
@@ -304,7 +222,7 @@ end;
 function AMax(Data: TIntegerArray): Integer;
 var
   i : integer;
-begin;
+begin
   if length(data) = 0 then
   begin
     Writeln('cannot define result of AMax, input length = 0');

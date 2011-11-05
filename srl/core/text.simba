@@ -211,7 +211,7 @@ begin
                   NewKey := Line2[j][TPos]
                 else
                 if (Pos(Orig[i - 1], Norm) <> 0) then
-                  NewKey := Line1[j][TPos]
+                  NewKey := Line1[j][TPos];
               end else
               if (i + 1 <= Length(Orig)) then
               begin
@@ -239,7 +239,7 @@ Description: Returns text in upperleft corner.
 *******************************************************************************}
 function GetUpText: string;
 begin
-  Result := rs_GetUpText
+  Result := rs_GetUpText;
 end;
 
 {*******************************************************************************
@@ -334,9 +334,9 @@ begin
   begin
     Result := True;
     case Action of
-      Move: MMouse(tx, ty + 2, Random(Length(txt) * 5), 4);
-      ClickLeft: Mouse(tx, ty + 2, Random(Length(txt) * 5), 4, True);
-      ClickRight: Mouse(tx, ty + 2, Random(Length(txt) * 5), 4, False);
+      aoMove: MMouse(tx, ty + 2, Random(Length(txt) * 5), 4);
+      aoClickLeft: Mouse(tx, ty + 2, Random(Length(txt) * 5), 4, True);
+      aoClickRight: Mouse(tx, ty + 2, Random(Length(txt) * 5), 4, False);
     end;
   end;
   FreeBitmap(S);
@@ -423,17 +423,17 @@ begin
   SortTPAFrom(Matches, Point(Box.x1, Box.y1));
   x := matches[0].x;
   y := matches[0].y;
-  if Action = Nothing then
+  if Action = aoNothing then
     Exit;
   GetMousePos(xx,yy);
   if not IntInBox(xx,yy,IntToBox(matches[0].x,matches[0].y,matches[0].x + Box.x2,Matches[0].y + (Box.y2 shr 1))) then
     MMouse(matches[0].x + Random(box.x2),Matches[0].y + Random(Box.y2 shr 1),0,0);
-  if Action = Move then
+  if Action = aoMove then
     Exit;
   GetMousePos(xx,yy);
   Case Action of
-    ClickLeft : Mouse(xx,yy,0,0,true);
-    ClickRight: Mouse(xx,yy,0,0,false);
+    aoClickLeft : Mouse(xx,yy,0,0,true);
+    aoClickRight: Mouse(xx,yy,0,0,false);
   end;
 end;
 
@@ -534,23 +534,23 @@ begin
       begin
         Result := True;
         case Action of
-          ClickLeft: MouseBoxEx(B.x1 + 5, TPA[0].Y, B.x2 - 5, TPA[0].Y + 5,5, 1);
-          Move:      MouseBoxEx(B.x1 + 5, TPA[0].Y, B.x2 - 5, TPA[0].Y + 5,5, 3);
-          Nothing:   begin end;
+          aoClickLeft: MouseBoxEx(B.x1 + 5, TPA[0].Y, B.x2 - 5, TPA[0].Y + 5,5, 1);
+          aoMove:      MouseBoxEx(B.x1 + 5, TPA[0].Y, B.x2 - 5, TPA[0].Y + 5,5, 3);
+          aoNothing:   begin end;
           else
             srl_warn('ChooseOptionMultiEx', 'ClickRight not a valid click for RS menus!', warn_AllVersions);
         end;
         Exit;
       end;
   end;
-  if Action <> Nothing then
+  if Action <> aoNothing then
   begin
     MMouse(B.X1 - 50, B.Y1 - 50, 40, B.Y2 - B.Y1);
     Wait(200 + Random(100));
   end;
 
   if (not result) then
-    chooseOptionMultiEx(['Cancel', 'ancel', 'ncel'], 'All', clickLeft);
+    chooseOptionMultiEx(['Cancel', 'ancel', 'ncel'], 'All', aoClickLeft);
 end;
 
 {*******************************************************************************
@@ -561,7 +561,7 @@ Will look for the first string first and so on.
 *******************************************************************************}
 function ChooseOptionMulti(Txt: TStringArray): Boolean;
 begin
-  Result := ChooseOptionMultiEx(Txt, 'All', ClickLeft);
+  Result := ChooseOptionMultiEx(Txt, 'All', aoClickLeft);
 end;
 
 {*******************************************************************************
@@ -573,7 +573,7 @@ Description: Finds an option in a popup menu, then clicks on it. Searches for
 *******************************************************************************}
 function ChooseOptionEx(Txt, TextType: string): Boolean;
 begin
-  Result := ChooseOptionMultiEx([Txt], TextType, ClickLeft);
+  Result := ChooseOptionMultiEx([Txt], TextType, aoClickLeft);
 end;
 
 {*******************************************************************************
@@ -583,7 +583,7 @@ Description: Finds an option in a popup menu, then clicks on it.
 *******************************************************************************}
 function ChooseOption(Txt: String): Boolean;
 begin
-  Result := ChooseOptionMultiEx([Txt], 'All', ClickLeft);
+  Result := ChooseOptionMultiEx([Txt], 'All', aoClickLeft);
 end;
 
 {*******************************************************************************
@@ -595,9 +595,9 @@ Description: Returns true if an Option in txt is found in the RS Option Menu
 function OptionsExist(txt: TStringArray; MoveMouse: boolean): boolean;
 begin
   if MoveMouse then
-    Result := ChooseOptionMultiEx(Txt, 'All', Move)
+    Result := ChooseOptionMultiEx(Txt, 'All', aoMove)
   else
-    Result := ChooseOptionMultiEx(Txt, 'All', Nothing);
+    Result := ChooseOptionMultiEx(Txt, 'All', aoNothing);
 end;
 
 {*******************************************************************************

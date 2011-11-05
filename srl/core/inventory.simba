@@ -617,7 +617,7 @@ Example:
 function CountItems(ItemType: string; Identifier: Integer; tol: TIntegerArray): Integer;
 begin
   GameTab(tab_Inv);
-  Result := CountItemsIn('inv', ItemType, Identifier, Tol)
+  Result := CountItemsIn('inv', ItemType, Identifier, Tol);
 end;
 
 (*
@@ -734,7 +734,7 @@ begin
   if ExistsItem(i) then
   begin
     MouseItem(i, False);
-    if (WaitOptionEx('rop', 'action', ClickLeft, 250)) then
+    if (WaitOptionEx('rop', 'action', aoClickLeft, 250)) then
     begin
       Result := True;
       Wait(RandomRange(50, 200));
@@ -1141,7 +1141,7 @@ Example:
 function ActivatedItem : integer;
 var
   i : integer;
-begin;
+begin
   result := -1;
   for i := 1 to 28 do
     if ItemActivated(i) then

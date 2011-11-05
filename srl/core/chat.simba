@@ -126,7 +126,7 @@ begin
   begin
     if (States[II] = '') then Continue;
     SetChat(States[II], II);
-  end
+  end;
 end;
 
 (*
@@ -381,7 +381,7 @@ begin
   if (FindColorsTolerance(cArr, TextCol, MCX1, P.y, MCX2, P.y + 13, 0)) then
   begin
     B := GetTPABounds(cArr);
-    result := Trim(GetTextAtExWrap(b.x1-1,p.y,B.x2+1,p.y+13,0,5,2,TextCol,0,SmallChars));
+    result := Trim(GetTextAtEx(b.x1-1,p.y,B.x2+1,p.y+13,0,5,2,TextCol,0,SmallChars));
   end;
 end;
 

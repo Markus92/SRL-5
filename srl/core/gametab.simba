@@ -536,7 +536,7 @@ begin
   if ((VarType(Skill) = varInteger) or (VarType(Skill) = varByte)) then
     skNo := Skill
   else
-  begin;
+  begin
     SkillS := Lowercase(Skill);
     case Lowercase(SkillS) of
       'hp', 'constitution': SkillS := 'hitpoints';
@@ -719,7 +719,7 @@ var
   B: TBox;
   W,H{, T}: integer;
   SearchBox : TBox;
-begin;
+begin
   Result := -1;
   ColorSign := '';
   case LowerCase(Leveltype) of
@@ -728,7 +728,7 @@ begin;
     'summon', 'summoning'                      : TP := Point(715,140);
     'run','energy'                             : TP := Point(730,105);
   else
-    begin;
+    begin
       srl_Warn('GetMMLevels', 'Invalid LevelType: ''' + LevelType + '', warn_AllVersions);
       Exit;
     end;
@@ -1046,7 +1046,7 @@ begin
 
   if (I = -1) then
   begin
-    SRL_Warn('GetEquiptItemBounds', 'Invalid entry (' + ToStr(Which) + ')', Warn_AllVersions);
+    SRL_Warn('GetEquiptItemBounds', 'Invalid entry (' + ToString(Which) + ')', Warn_AllVersions);
     Exit;
   end;
 
@@ -1289,7 +1289,7 @@ begin
   if (IsTextInAreaEx(635, 205, 727, 226, TextX, TextY, 'RuneSca', 5,
                      SmallChars, False, False, 0, 0, 3381759)) then
     Result := StrToIntDef(Trim(GetTextAtEx(TextX + 65, TextY, 5,
-      SmallChars, True, False, 0, 0, 3381759}, 3, False, tr_AllChars)), -1);
+      SmallChars, True, False, 0, 0, 3381759, 3, False, tr_AllChars)), -1);
   if (Result = -1) then
     srl_Warn('CurrentWorld', 'Could not get Player''s current world', Warn_AllVersions);
 end;
@@ -1459,7 +1459,7 @@ begin
   Mouse(TP.x, TP.y + 3, 2, 2, False);
   WaitOption('bjec', 300 + Random(500));
   Wait(1000 + Random(250));
-  if (FindTextTpa(clBlack, 0, 100, 390, 235, 410, 'Enter the skill', UpChars, Nothing)) then
+  if (FindTextTpa(clBlack, 0, 100, 390, 235, 410, 'Enter the skill', UpChars, aoNothing)) then
   begin
     Wait(1000 + Random(250));
     TypeSend(IntToStr(Level));
@@ -1739,7 +1739,7 @@ begin
     end;
 
   i := 0;                       //failsafe opening clause
-  while (not FindTextTPA(ClWhite, 0, MSX1, MSY1, MSX2, MSY2, 'aphics', UpChars, Nothing)) and (LoggedIn) do
+  while (not FindTextTPA(ClWhite, 0, MSX1, MSY1, MSX2, MSY2, 'aphics', UpChars, aoNothing)) and (LoggedIn) do
   begin
     GameTab(tab_Options);
     MouseBox(605, 258, 623, 277, 1);
@@ -1753,7 +1753,7 @@ begin
     end;
   end;
 
-  If FindTextTPA(ClWhite, 0, MSX1, MSY1, MSX2, MSY2, 'aphics', UpChars, Nothing) Then
+  If FindTextTPA(ClWhite, 0, MSX1, MSY1, MSX2, MSY2, 'aphics', UpChars, aoNothing) Then
     Mouse(386, 172, 30, 10, True);
 
   if GetColor(255, 178) = BrightnessColor then
@@ -1847,7 +1847,7 @@ begin
       Mouse(MMCX, MMCY, 2, 2, True);
 
   II := 0;
-  while (not FindTextTPA(2070753, 0, MSX1, MSY1, MSX2, MSY2, 'Graphics Options', UpChars, Nothing)) and (LoggedIn) do
+  while (not FindTextTPA(2070753, 0, MSX1, MSY1, MSX2, MSY2, 'Graphics Options', UpChars, aoNothing)) and (LoggedIn) do
   begin
     GameTab(tab_Options);
     MouseBox(605, 258, 623, 277, 1);
@@ -1956,7 +1956,7 @@ begin
     if (not ClickContinue(True, True)) then
       Mouse(MMCX, MMCY, 2, 2, True);
 
-  while (not FindTextTPA(2070753, 0, MSX1, MSY1, MSX2, MSY2, 'Audio Options', UpChars, Nothing)) and (LoggedIn) do
+  while (not FindTextTPA(2070753, 0, MSX1, MSY1, MSX2, MSY2, 'Audio Options', UpChars, aoNothing)) and (LoggedIn) do
   begin
     GameTab(tab_Options);
     MouseBox(654, 252, 677, 278, 1);

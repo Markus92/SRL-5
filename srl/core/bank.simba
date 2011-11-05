@@ -92,7 +92,7 @@ begin
       Wait(50);
     Wait(RandomRange(100, 150));
   end;
-  Result := FindTextTPA(4106994, 20, 20, 22, 400, 45, 'Bank', upchars, Nothing);
+  Result := FindTextTPA(4106994, 20, 20, 22, 400, 45, 'Bank', upchars, aoNothing);
 end;
 
 (*
@@ -147,7 +147,7 @@ Example:
 *)
 function PinScreen : Boolean;
 begin
-  Result := FindTextTPA(2070783, 0, 105, 62, 150, 75, 'Please', UpChars, Nothing);
+  Result := FindTextTPA(2070783, 0, 105, 62, 150, 75, 'Please', UpChars, aoNothing);
 end;
 
 (*
@@ -711,7 +711,7 @@ begin
     while (BankScreen) and (GetSystemTime - T < 5000) do
     begin
       Wait(500 + Random(500));
-      if (FindTextTpa(0, 0, 350, 392, 399, 410, 'search', UpChars, Nothing)) then
+      if (FindTextTpa(0, 0, 350, 392, 399, 410, 'search', UpChars, aoNothing)) then
       begin
         TypeSend(Item);
         Exit;
@@ -984,8 +984,8 @@ var
   BankBox: TBox;
   Found: Boolean;
   t: TPointArray;
-label
-  Start;
+//label
+//  Start;
 begin
   Result := False;
   if not BankScreen then Exit;
@@ -993,7 +993,7 @@ begin
 
   if (Index = 0) then
   begin
-    Start:
+//    Start:
     for Index := 1 to 50 do
     begin
       if FindItemEx(x, y, IdentType, Ident, BankIndexToMSBox(Index), Tol) then
@@ -1019,7 +1019,7 @@ begin
     else
     begin
       Writeln('Item Moved from Bank Slot ' + IntToStr(Index) + ', checking bank again.');
-      GoTo Start;
+//      GoTo Start;
     end;
   end;
   Wait(RandomRange(200, 350));

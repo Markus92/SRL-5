@@ -1,0 +1,45 @@
+procedure DebugLn(s: string);
+begin
+end;
+
+procedure Swap(var a, b);
+begin
+end;
+
+function GetSystemTime: UInt32;
+begin
+  Result := GetTickCount;
+end;
+
+function iAbs(i: Integer): Integer;
+begin
+  Result := Abs(i);
+end;
+
+function Chr(c: Byte): Char; overload;
+begin
+  Result := Char(c);
+end;
+
+function Chr(c: Word): WideChar; overload;
+begin
+  Result := WideChar(c);
+end;
+
+const
+  clWhite = 255 * 255 * 255;
+  clBlack = 0;
+  clBlue  = 255 shl 16;
+  clPurple= clBlue + 100;
+
+  CharsNPC = -1;
+  UpChars = -1;
+  SmallChars = -1;
+  StatChars = -1;
+  FriendChars = -1;
+
+type
+  TBooleanArray = array of Boolean;
+
+{$define Simba}
+{$include SRL/SRL.simba}

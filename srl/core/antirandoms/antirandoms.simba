@@ -368,8 +368,8 @@ begin
     LoadSRLBitMaps;
   if (FindColorTolerance(tX, tY, 14737632, MCX1, MCY1, MCX1 + 40, MCY2, 15)) or
        (FindColorTolerance(tX, tY, 589815, MCX1, MCY1, MCX1 + 40, MCY2, 15)) then
-    if (FindTransparentBitmapTolerance(bmpMod, tX, tY, clBlack, MCX1, MCY1, MCX1 + 40, MCY2, 15)) or
-     (FindTransparentBitmapTolerance(bmpAdmin, tx, ty, clBlack, MCX1, MCY1, MCX1 + 40, MCY2, 15)) then
+    if (FindBitmapToleranceIn(bmpMod, tX, tY, MCX1, MCY1, MCX1 + 40, MCY2, 15)) or
+     (FindBitmapToleranceIn(bmpAdmin, tx, ty, MCX1, MCY1, MCX1 + 40, MCY2, 15)) then
     begin
       Result := True;
       AddToSRLLog('******** FOUND MOD ********');

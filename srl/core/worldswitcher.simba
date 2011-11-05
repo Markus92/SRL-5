@@ -330,7 +330,7 @@ begin
 
   SPos := (SB.y1+BarHeight/2) + (WPos)*(SB.y2-SB.y1-BarHeight)/(H+1-WorldsOnScreen);//need the 0.0 to make it extended inside ()
   CurPos := (SP.y1 + BarHeight/2);
-  Debugln('SCROLLINFO: CurPos: '+ToStr(CurPos)+' WPos: '+ToStr(WPos)+' H+1: '+ToSTr(H+1)+' SPos: '+ToStr(SPos));
+  Debugln('SCROLLINFO: CurPos: '+ToString(CurPos)+' WPos: '+ToString(WPos)+' H+1: '+ToString(H+1)+' SPos: '+ToString(SPos));
   if InRange(SPos, CurPos - BarHeight, CurPos + BarHeight) then
   begin//if its too close the scroll bar won't move to correct position
     if (CurPos < ((SB.y1+BarHeight/2)+ (SB.y2-SB.y1-BarHeight)/2)) then//half point
@@ -436,7 +436,7 @@ begin
         if WRec.PlayerNo = -2 then
           WriteLn('World ' + IntToStr(W) + ' is FULL.')
         else
-          WriteLn('World ' + IntToStr(W) + ' is OFFLINE.')
+          WriteLn('World ' + IntToStr(W) + ' is OFFLINE.');
     end else
       WriteLn('Failed to find World ' + IntToStr(W) + '!');
     if (not(Result)) then TypeByte(vk_Escape);

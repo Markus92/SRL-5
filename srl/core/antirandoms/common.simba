@@ -45,7 +45,7 @@ begin
    WriteLn('Screenshot of: ' + reason + ' ' + TimeRunning);
   except
    Writeln('Failed to save screenshot of: ' + reason);
-  end
+  end;
 end;
 
 {*******************************************************************************

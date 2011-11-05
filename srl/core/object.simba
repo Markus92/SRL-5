@@ -131,7 +131,7 @@ begin
         Wait(100 + Random(100));
         if (Length(UpTextMulti) > 0) then
           if WaitUpTextMulti(UpTextMulti, 300) then
-          begin;
+          begin
             Result := True;
             Break;
           end;
@@ -228,7 +228,7 @@ begin
       a := a + 1;
       if a mod 5 = 0 then a := 1;
       if (a = 1) or (a = 3) then i := i + 1;
-    until (Result) or ((CurX > xe) and (CurY > ye))
+    until (Result) or ((CurX > xe) and (CurY > ye));
   end;
 end;
 

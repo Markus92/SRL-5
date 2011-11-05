@@ -221,7 +221,7 @@ begin
         Inc(x);
       end else
         break;
-    until(x >= 5)
+    until(x >= 5);
   end;
   repeat
     if FindColor(x, y, 14790912, 361,234, 673,373) then  //wtf is this
@@ -308,7 +308,7 @@ begin
           Exit;
         end;
       end;
-    end
+    end;
   end;
 end;
 
@@ -384,8 +384,8 @@ var
   TPA: TPointArray;
   Boxes : TIntegerArray;
   //B: TBox;
-label
-  ProcStart;
+//label
+//  ProcStart;
 begin
   ActivateClient;
   Wait(100);
@@ -449,7 +449,7 @@ begin
   if (Length(Players[CurrentPlayer].WorldInfo) > 0) then
     Members := Players[CurrentPlayer].WorldInfo[0];
 
-  ProcStart:
+//  ProcStart:
 
   {if (Members) then
     I := 1;
@@ -598,7 +598,7 @@ begin
   begin
     RetryLogin := False;
     Inc(Attempts);
-    goto ProcStart;
+//    goto ProcStart;
   end;
 
 end;
@@ -613,10 +613,10 @@ var
   RetryLogin, B, BB: Boolean;
   Actions: TVariantArray;
   T, Attempts: LongInt;
-label
-  ProcStart;
+//label
+//  ProcStart;
 begin
-  ProcStart:
+//  ProcStart:
   //Writeln('1');
   if (not (Result)) then    {Check if Logged in}
     Result := LoggedIn;
@@ -762,13 +762,13 @@ begin
   begin
     RetryLogin := False;
     Inc(Attempts);
-    goto ProcStart;
+//    goto ProcStart;
   end;
 
                       {Set player start time ect...}
 
-  if (Result) then
-    goto ProcStart;
+//  if (Result) then
+//    goto ProcStart;
 
 end;
 
@@ -899,7 +899,7 @@ begin
 		1: Wrong := (Pos(Players[i].nick, Capitalize(Players[i].name))<1);
       end;
       if Wrong then
-      begin;
+      begin
         Writeln('--');
         Writeln('WARNING: ' + WarnStrings[II] + ' with player: ' + Players[i].Name);
         FWrong := True;

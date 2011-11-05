@@ -1,0 +1,11 @@
+//-----------------------------------------------------------------//
+//--               Scar Standard Resource Library                --//
+//--                       Defines.scar                          --//
+//-----------------------------------------------------------------//
+
+{$IFNDEF Simba}
+  {$define SCAR}
+  {$IFNDEF SCAR321_UP}
+    {$DEFINE LoadExtraFonts}
+  {$ENDIF}
+{$ENDIF}

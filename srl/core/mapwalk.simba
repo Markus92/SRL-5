@@ -351,7 +351,7 @@ begin
         Result := True;
         FreeBitmap(Bmp);
         Exit;
-      end
+      end;
     end;
   FreeBitmap(Bmp);
 end;

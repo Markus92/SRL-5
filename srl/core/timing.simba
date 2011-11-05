@@ -201,7 +201,7 @@ Description: Waits for a TStringArray of options and selects one of them
 *******************************************************************************}
 function WaitOptionMulti(S: TStringArray; Time: Integer): Boolean;
 begin
-  Result := WaitOptionMultiEx(S, 'all', ClickLeft, Time);
+  Result := WaitOptionMultiEx(S, 'all', aoClickLeft, Time);
 end;
 
 {*******************************************************************************
@@ -221,7 +221,7 @@ Description: Waits for an Option and selects it
 *******************************************************************************}
 function WaitOption(S: string; Time: Integer): Boolean;
 begin
-  Result := WaitOptionMultiEx([S], 'all', ClickLeft, Time);
+  Result := WaitOptionMultiEx([S], 'all', aoClickLeft, Time);
 end;
 
 {*******************************************************************************

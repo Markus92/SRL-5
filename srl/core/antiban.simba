@@ -49,7 +49,7 @@ function LeaveDangerZone: Boolean;
 var
   t: Integer;
 begin
-  if (FindNPCChatText('erous', Nothing)) then // Only if total level < 60
+  if (FindNPCChatText('erous', aoNothing)) then // Only if total level < 60
   begin
     ClickContinue(True, True);
 
@@ -57,7 +57,7 @@ begin
     while (GetSystemTime < t) do
     begin
       Wait(500 + Random(300));
-      if (FindNPCChatText('eave', ClickLeft)) then
+      if (FindNPCChatText('eave', aoClickLeft)) then
       begin
         Result := True;
         Break;
@@ -157,7 +157,7 @@ begin
       repeat
         Skill := RandomRange(skill_Attack, skill_Summoning);
         TP := SkillToCoords(Skill);
-      until(GetSkillLevel(TheSkill) > 1)
+      until(GetSkillLevel(TheSkill) > 1);
 
   end else begin
   
@@ -445,7 +445,7 @@ var
   X, Y : Integer;
 begin
   if (not(FindColor(X, Y, 0, 7, 460, 69, 474))) then
-    Result:= FindNPCChatText('gratu', Nothing);
+    Result:= FindNPCChatText('gratu', aoNothing);
   if Result then
   begin
     ClickContinue(True, True);

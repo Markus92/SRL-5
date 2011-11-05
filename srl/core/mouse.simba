@@ -289,9 +289,9 @@ begin
     begin
       MoveMouse(Path[i].x, Path[i].y);
       Wait(Random(2) + 2);
-      if (GetSystemTime - St >= Time) then Break
+      if (GetSystemTime - St >= Time) then Break;
     end;
-  until (GetSystemTime - St >= Time)
+  until (GetSystemTime - St >= Time);
 end;
 
 function WaitUpTextMulti(S: TStringArray; Time: Integer): Boolean; Forward;

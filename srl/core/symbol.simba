@@ -261,7 +261,7 @@ begin
           '33E5F5A08DC3ECD434550779BBBE9D3D1290C9846FDEC63EC02A8' +
           '13D9B7F5C77AE9AF337B86DE4A5E1E0D7649EABE4F9F601C37765' +
           'F5');
-        Result := 4740173
+        Result := 4740173;
       end;
     'axe shop':
       begin
@@ -280,7 +280,7 @@ begin
           '4C484236CA341999CBBFA7020A6CEFEDF74339B9CF3463E530A99' +
           '4993ADDCA55C6D6F647E955B959CB757F22754F2F9ED8DBCCCD01' +
           'B137B3CDAB290E76797E60B5A736560');
-        Result := 7565679
+        Result := 7565679;
       end;
     'windmill':
       begin
@@ -535,7 +535,7 @@ begin
           'B5EF5166D7D4C89DE6DE9C45C6DF8BB1733FBBB15FD0A1B10B001' +
           '99F9CCC42C5AB77B16DFEF4C86BF370B355C653272428513EA990' +
           'C3FF3393954EEFC2327CFE4CCCFC933136A263F5CC35F29');
-        Result := 682309
+        Result := 682309;
       end;
     'candle shop':
       begin
@@ -569,7 +569,7 @@ begin
           '9821B1A206E3EE49F5DAC1F835724F36F7E9D12CCD370DBE40EE7' +
           '9854FE9864330DF993C8ECC9CC66F65039F7FD551B3BDCFFF9018' +
           '756682E');
-        Result := 5286667
+        Result := 5286667;
       end;
     'hunter store':
       begin
@@ -588,7 +588,7 @@ begin
           '8D3678C55D360F6F89FE919211B9EC267A2C87CB32F6FFD08EC70' +
           'CF6FDDC8D554597F712FF3AC3AE546C96A1FE573B2BC0197F063A' +
           'B');
-        Result := 10398118
+        Result := 10398118;
       end;
     'sandpit':
       begin
@@ -656,10 +656,10 @@ begin
     srl_Warn('GetSymbolColorIn', Name + ' is not a valid name.', warn_AllVersions);
   try
     FreeBitmap(SymbolBitmap);
-  finally
-    ColorToleranceSpeed(Speed);
   except
     Result := 0;
+  finally
+    ColorToleranceSpeed(Speed);
   end;
 end;
 

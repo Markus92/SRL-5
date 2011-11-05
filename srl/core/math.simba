@@ -45,7 +45,7 @@ Description: Returns the TPointArray of the inputted Text. Needs Wizzyplugin
 function CreateTPAFromText(Txt : string; Chars : string) : TPointArray;
 var
   w,h : integer;
-begin;
+begin
   result := TPAFromText(Txt,Chars,w,h);
 end;
 
@@ -98,7 +98,7 @@ begin
       last := temp;
     end;
     t := t + ThetaInc;
-  until (done)
+  until (done);
 end;
 
 {*******************************************************************************

@@ -205,7 +205,7 @@ begin
     Exit;
 
   if (not InRange(which, 0, (srl_AutoColorCount - 1))) then
-  begin;
+  begin
     srl_Warn('LoadAutoColor', 'Index ''' + IntToStr(which) + ''' is not a valid AutoColor. ', warn_AllVersions);
     Exit;
   end;
