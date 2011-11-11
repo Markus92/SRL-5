@@ -127,7 +127,7 @@ begin
     TheAction := Mime_Empty;
     t := GetSystemTime + 60000;
     while (TheAction = Mime_Empty) and LoggedIn and (t > GetSystemTime) do
-      TheAction := Mime_AnalyzeAnimation(ExportImageTarget);
+      TheAction := Mime_AnalyzeAnimation(GetTClient.IOManager.GetImageTarget);
 
     if TheAction = Mime_Unknown then Continue;
     //Writeln('[Mime] - Found Action: '#39 + TheAction + #39);

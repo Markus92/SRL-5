@@ -220,7 +220,7 @@ var
 begin
   for i := 0 to 4 do
   begin
-    Result := Mordaut_GetSlotNr(M_ScanningTime, ExportImageTarget);
+    Result := Mordaut_GetSlotNr(M_ScanningTime, GetTClient.IOManager.GetImageTarget);
     Wait(RandomRange(1000, 2000));
     if (Result <> 0) then Exit;
   end;
@@ -258,7 +258,7 @@ var
   Slots: TIntegerArray;
   i, Sx1, Sy1, Sx2, Sy2: integer;
 begin
-  Mordaut_GetBigSlotNr(M_ScanningTime, M_QuestionType, ExportImageTarget, ThaSlots);
+  Mordaut_GetBigSlotNr(M_ScanningTime, M_QuestionType, GetTClient.IOManager.GetImageTarget, ThaSlots);
   Slots := m_GetSlots(ThaSlots);
 
   S := '[Mordaut - Big] Answers: ';

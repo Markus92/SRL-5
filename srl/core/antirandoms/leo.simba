@@ -418,7 +418,7 @@ begin
         BadName := False;
         Mouse(C.X, C.Y, 2, 2, True);
         Leo_WaitForScreen('coffin');
-        CofNames[Coffin] := Leo_AnalyzeCoffin2(ExportImageTarget);
+        CofNames[Coffin] := Leo_AnalyzeCoffin2(GetTClient.IOManager.GetImageTarget);
         Wait(RandomRange(1000, 2000));
         Mouse(490, 26, 2, 2, True);
         for III := 0 to 4 do
@@ -471,7 +471,7 @@ begin
           GetMousePos(RGS.X, RGS.Y);
           Mouse(RGS.X, RGS.Y, 0, 0, True);
           Leo_WaitForScreen('');
-          GraveNames[I][II] := Leo_AnalyzeGraveStone2(ExportImageTarget);
+          GraveNames[I][II] := Leo_AnalyzeGraveStone2(GetTClient.IOManager.GetImageTarget);
           if (GraveNames[I][II] = Coffin_empty) then
             GraveNames[I][II] := coffin_error;
           WriteLn('Grave ' + IntToStr(I + 1) + ' ' + IntToStr(II + 1) + ' ' + ToStr(GraveNames[I][II]) + ' identified!');

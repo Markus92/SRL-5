@@ -27,7 +27,7 @@ library irokiplugin;
 {$mode objfpc}{$H+}
 
 uses
-  Classes, math,sysutils
+  Classes, math,sysutils,interfaces,mufasatypes,iomanager
   { you can add units after this };
 
 type
@@ -60,20 +60,20 @@ const
    clWhite   = TColor($FFFFFF);
 
 
-type
+{type
   TRGB32 = packed record
     B, G, R, A: Byte;
   end;
   PRGB32 = ^TRGB32;
 
   TPointArray = array of TPoint;
-
+     } type
   TFill = record
     Width, Height, Area,
     MidX, MidY, x1, y1, groups,
     x2, y2: Integer;
    end;
-  TRetData = record
+  { TRetData = record
     Ptr : PRGB32;
     IncPtrWith : integer;
     RowLen : integer;
@@ -98,7 +98,7 @@ type
       ReleaseKey: procedure(target: pointer; key: integer); stdcall;
       IsKeyHeld: function(target: pointer; key: integer): boolean; stdcall;
       GetKeyCode : function(target : pointer; C : char) : integer; stdcall;
-    end;
+    end; }
 
 
 var
@@ -183,7 +183,7 @@ const
   Mime_Climb_rope = 7;
   Mime_Cry = 8;
 
-function Mime_AnalyzeAnimation(ImageClient : TTarget_Exported): Integer;  register;
+function Mime_AnalyzeAnimation(ImageClient : TTarget): Integer;  register;
 
 var
   Line: PRGB32;
@@ -202,7 +202,7 @@ begin
 
   w := 500; h := 120;
   SetLength(c1, w + 1, h + 1);
-  RetData := ImageClient.ReturnData(ImageClient.Target,4,4,w,h);
+  RetData := ImageClient.ReturnData(4,4,w,h);
 
   FirstArea := 0;
 
@@ -219,7 +219,7 @@ begin
     end;
   end;
 
-  ImageClient.FreeReturnData(ImageClient.Target);
+  ImageClient.FreeReturnData;
 
   if (FirstArea = 0) then Result := True;
 
@@ -235,7 +235,7 @@ begin
     w := 500; h := 120;
     SetLength(c1, w + 1, h + 1);
 
-    RetData := ImageClient.ReturnData(ImageClient.Target,4,4,w,h);
+    RetData := ImageClient.ReturnData(4,4,w,h);
     FirstArea := 0;
 
     for y := 50 to 118 do
@@ -250,7 +250,7 @@ begin
       end;
     end;
 
-  ImageClient.FreeReturnData(ImageClient.Target);
+  ImageClient.FreeReturnData;
 
   until (FirstArea <> 0);
 
@@ -262,7 +262,7 @@ begin
     w := 430; h := 210;
     SetLength(c, w + 1, h + 1);
     SetLength(b, w + 1, h + 1);
-    RetData := ImageClient.ReturnData(ImageClient.Target,0,0,w,h);
+    RetData := ImageClient.ReturnData(0,0,w,h);
 
 
     BlackArea := 0;
@@ -361,7 +361,7 @@ begin
       BMinArea := BArea;
     end;
 
-  ImageClient.FreeReturnData(ImageClient.Target);
+  ImageClient.FreeReturnData;
 
 
   until SpotLight;
@@ -2251,7 +2251,10 @@ end;
 
 {- Scar stuff! -}
 
-
+procedure SetPluginMemManager(MemMgr : TMemoryManager); stdcall; export;
+begin
+  SetMemoryManager(MemMgr);
+end;
 
 function GetFunctionCount(): Integer; stdcall; export;
 begin
@@ -2272,37 +2275,37 @@ begin
     0:
       begin
         ProcAddr := @Mordaut_GetSlotNr;
-        StrPCopy(ProcDef, 'function Mordaut_GetSlotNr(ScanningTime: Extended; ImageClient : TTarget_Exported): integer;');
+        StrPCopy(ProcDef, 'function Mordaut_GetSlotNr(ScanningTime: Extended; ImageClient : TTarget): integer;');
       end;
     1:
       begin
         ProcAddr := @Mordaut_GetBigSlotNr;
-        StrPCopy(ProcDef, 'procedure Mordaut_GetBigSlotNr(ScanningTime: Extended; QuestionType: Integer; ImageClient : TTarget_Exported; var ThaSlots :Integer);');
+        StrPCopy(ProcDef, 'procedure Mordaut_GetBigSlotNr(ScanningTime: Extended; QuestionType: Integer; ImageClient : TTarget; var ThaSlots :Integer);');
       end;
     2:
       begin
         ProcAddr := @Mime_AnalyzeAnimation;
-        StrPCopy(ProcDef, 'function Mime_AnalyzeAnimation(ImageClient : TTarget_Exported): Integer;');
+        StrPCopy(ProcDef, 'function Mime_AnalyzeAnimation(ImageClient : TTarget): Integer;');
       end;
     3:
       begin
         ProcAddr := @Leo_AnalyzeCoffin2;
-        StrPCopy(ProcDef, 'function Leo_AnalyzeCoffin2(ImageClient : TTarget_Exported): Integer;');
+        StrPCopy(ProcDef, 'function Leo_AnalyzeCoffin2(ImageClient : TTarget): Integer;');
       end;
     4:
       begin
         ProcAddr := @Leo_AnalyzeGraveStone2;
-        StrPCopy(ProcDef, 'function Leo_AnalyzeGraveStone2(ImageClient: TTarget_Exported): Integer;');
+        StrPCopy(ProcDef, 'function Leo_AnalyzeGraveStone2(ImageClient: TTarget): Integer;');
       end;
     5:
       begin
         ProcAddr := @Pete_AnalyzeAnimal;
-        StrPCopy(ProcDef, 'function Pete_AnalyzeAnimal( var AnimalName: Integer; ImageClient : TTarget_Exported): Boolean;');
+        StrPCopy(ProcDef, 'function Pete_AnalyzeAnimal( var AnimalName: Integer; ImageClient : TTarget): Boolean;');
       end;
     6:
       begin
         ProcAddr := @Pete_FindAnimal;
-        StrPCopy(ProcDef, 'function Pete_FindAnimal(var px, py: Integer; AnimalName: integer; ImageClient : TTarget_Exported): Boolean;');
+        StrPCopy(ProcDef, 'function Pete_FindAnimal(var px, py: Integer; AnimalName: integer; ImageClient : TTarget): Boolean;');
       end;
   else
     x := -1;
@@ -2310,7 +2313,7 @@ begin
   Result := x;
 end;
 
-
+exports SetPluginMemManager;
 exports GetFunctionCount;
 exports GetFunctionInfo;
 exports GetFunctionCallingConv;

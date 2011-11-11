@@ -355,7 +355,7 @@ begin
       begin
         MS := MouseSpeed;
         MouseSpeed := 35;
-        Pete_FindAnimal(P.X, P.Y, Animal, ExportImageTarget);
+        Pete_FindAnimal(P.X, P.Y, Animal, GetTClient.IOManager.GetImageTarget);
         if (PointInBox(P, IntToBox(MSX1, MSY1, MSX2, MSY2))) then
           Mouse(P.X, P.Y, 0, 0, False);
         MouseSpeed := MS;
